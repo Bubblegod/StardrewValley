@@ -44,8 +44,11 @@ public class mainFrame extends JFrame implements gameConfig{
 		this.addKeyListener(plis);
 		
 		//启动人物移动线程
-		Player player = new Player();
+		People player = new People();
 		player.start();
+		NPC npc = new NPC();
+		npc.start();
+		//player2.start();
 		
 		//启动刷新面板线程
 		UpdateThread ut = new UpdateThread(panel);
@@ -60,6 +63,7 @@ public class mainFrame extends JFrame implements gameConfig{
 		panel.setPreferredSize(new Dimension(panelX, panelY));
 		panel.setLayout(null);
 		panel.setBackground(Color.black);
+		panel.setBackground(Color.GRAY);
 		
 		return panel;
 	}
@@ -75,22 +79,27 @@ public class mainFrame extends JFrame implements gameConfig{
 			int code = e.getKeyCode();
 			switch (code) {
 			case KeyEvent.VK_UP:
-				Player.up = true;
-				Player.towards = 1;
+				People.up = true;
+				People.towards = 1;
 				break;
 			case KeyEvent.VK_DOWN:
-				Player.down = true;
-				Player.towards = 2;
+				People.down = true;
+				People.towards = 2;
 				break;
 			case KeyEvent.VK_LEFT:
-				Player.left = true;
-				Player.towards = 3;
+				People.left = true;
+				People.towards = 3;
 				break;
 			case KeyEvent.VK_RIGHT:
-				Player.right = true;
-				Player.towards = 4;
+				People.right = true;
+				People.towards = 4;
 				break;
-
+			case KeyEvent.VK_J:
+				People.chop1 = true;
+				break;
+			case KeyEvent.VK_K:
+				People.chop2 = true;
+				break;
 			default:
 				break;
 			}
@@ -100,22 +109,27 @@ public class mainFrame extends JFrame implements gameConfig{
 			int code = e.getKeyCode();
 			switch (code) {
 			case KeyEvent.VK_UP:
-				Player.up = false;
-				Player.up1 = 0;
+				People.up = false;
+				People.up1 = 0;
 				break;
 			case KeyEvent.VK_DOWN:
-				Player.down = false;
-				Player.down1 = 0;
+				People.down = false;
+				People.down1 = 0;
 				break;
 			case KeyEvent.VK_LEFT:
-				Player.left = false;
-				Player.left1 = 0;
+				People.left = false;
+				People.left1 = 0;
 				break;
 			case KeyEvent.VK_RIGHT:
-				Player.right = false;
-				Player.right1 = 0;
+				People.right = false;
+				People.right1 = 0;
 				break;
-
+			case KeyEvent.VK_J:
+				People.chop1 = false;
+				break;
+			case KeyEvent.VK_K:
+				People.chop2 = false;
+				break;
 			default:
 				break;
 			}
@@ -131,23 +145,44 @@ public class mainFrame extends JFrame implements gameConfig{
 		public void paint(Graphics g) {
 			super.paint(g);
 			//找到角色旁边的素材，上下左右各5格
-			for(int i=Player.getI()-6;i<=Player.getI()+6;i++){
-				for(int j=Player.getJ()-6;j<=Player.getJ()+6;j++){
+			for(int i=People.getI()-10;i<=People.getI()+10;i++){
+				for(int j=People.getJ()-10;j<=People.getJ()+10;j++){
 					//如果这一格没有超界
 					if(i>=0&&j>=0&&i<ReadMapFile.map1.length&&j<ReadMapFile.map1[0].length){
 						//画第一层元素
 						ImageIcon icon = GetMap.int2icon(ReadMapFile.map1[i][j]);
-						g.drawImage(icon.getImage(), (Player.px-elesize/2)+((j-Player.getJ())*elesize)-(Player.mx%elesize), (Player.py-elesize/2)+((i-Player.getI())*elesize)-(Player.my%elesize), elesize, elesize, null);
+						g.drawImage(icon.getImage(), (People.px-elesize/2)+((j-People.getJ())*elesize)-(People.mx%elesize), (People.py-elesize/2)+((i-People.getI())*elesize)-(People.my%elesize), elesize, elesize, null);
 						//第二层
+						//if(ReadMapFile.map2[i][j]!=105){
 						ImageIcon icon2 = GetMap.int2icon(ReadMapFile.map2[i][j]);
-						g.drawImage(icon2.getImage(), (Player.px-elesize/2)+((j-Player.getJ())*elesize)-(Player.mx%elesize), (Player.py-elesize/2)+((i-Player.getI())*elesize)-(Player.my%elesize), elesize, elesize, null);
+						g.drawImage(icon2.getImage(), (People.px-elesize/2)+((j-People.getJ())*elesize)-(People.mx%elesize), (People.py-elesize/2)+((i-People.getI())*elesize)-(People.my%elesize), icon2.getImage().getWidth(getParent()),  icon2.getImage().getHeight(getParent()), null);
+						String temp;
+						temp=i+" ";
+						temp+=j+"";
+						g.drawString(temp, (People.px-elesize/2)+((j-People.getJ())*elesize)-(People.mx%elesize), (People.py-elesize/2)+((i-People.getI())*elesize)-(People.my%elesize));
+						
 						//第三层
 //						ImageIcon icon3 = GetMap.int2icon(ReadMapFile.map3[i][j]);
-//						g.drawImage(icon3.getImage(), (Player.px-elesize/2)+((j-Player.getJ())*elesize)-(Player.mx%elesize), (Player.py-elesize/2)+((i-Player.getI())*elesize)-(Player.my%elesize), elesize, elesize, null);
+//						g.drawImage(icon3.getImage(), (People.px-elesize/2)+((j-People.getJ())*elesize)-(People.mx%elesize), (People.py-elesize/2)+((i-People.getI())*elesize)-(People.my%elesize), elesize, elesize, null);
 					}
 				}
 			}
-			Player.draw(g);
+			int i=7;int j=25;
+			ImageIcon icon = GetMap.int2icon(ReadMapFile.map2[i][j]);
+			g.drawImage(icon.getImage(), (People.px-elesize/2)+((j-People.getJ())*elesize)-(People.mx%elesize), (People.py-elesize/2)+((i-People.getI())*elesize)-(People.my%elesize), 400, 200, null);
+			
+			i=7;j=15;
+			icon = GetMap.int2icon(ReadMapFile.map2[i][j]);
+			g.drawImage(icon.getImage(), (People.px-elesize/2)+((j-People.getJ())*elesize)-(People.mx%elesize), (People.py-elesize/2)+((i-People.getI())*elesize)-(People.my%elesize), 200, 200, null);
+			
+			i=7;j=38;
+			icon = GetMap.int2icon(ReadMapFile.map2[i][j]);
+			g.drawImage(icon.getImage(), (People.px-elesize/2)+((j-People.getJ())*elesize)-(People.mx%elesize), (People.py-elesize/2)+((i-People.getI())*elesize)-(People.my%elesize), 400, 200, null);
+			
+			i=10;j=59;
+			icon = GetMap.int2icon(ReadMapFile.map2[i][j]);
+			g.drawImage(icon.getImage(), (People.px-elesize/2)+((j-People.getJ())*elesize)-(People.mx%elesize), (People.py-elesize/2)+((i-People.getI())*elesize)-(People.my%elesize), 100, 200, null);
+			People.draw(g);
 		}
 	}
 }

@@ -36,6 +36,7 @@ public class ReadMapFile {
 					map3[ii][jj] = dis.readInt();
 				}
 			}
+			
 			dis.close();
 			fis.close();
 		}catch(Exception e){
