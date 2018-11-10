@@ -22,24 +22,24 @@ public interface gameConfig {
 	int playersize = 50;
 	//------------[ÓÎÏ·ËØ²Ä]----------
 	//-----µÚÒ»²ã
-	ImageIcon icon0 = new ImageIcon("000¿Õ°×.png");
-	ImageIcon icon1 = new ImageIcon("001²ÝµØ.png");
-	ImageIcon icon2 = new ImageIcon("002µØ×©.png");
-	ImageIcon icon3 = new ImageIcon("003ÕÙÔóµØ°å¸±±¾.png");
-	ImageIcon icon4 = new ImageIcon("004sea.png");
-	ImageIcon icon5 = new ImageIcon("005mud.png");
-	ImageIcon icon101 = new ImageIcon("101ÂÌÊ÷.png");
-	ImageIcon icon102 = new ImageIcon("102ÂÌÖñ.png");
-	ImageIcon icon103 = new ImageIcon("103¸ßÂÌÊ÷.png");
-	ImageIcon icon105 = new ImageIcon("105house.png");
-	ImageIcon icon106 = new ImageIcon("106volcano.png");
-	ImageIcon icon107 = new ImageIcon("107barn.png");
-	ImageIcon icon108 = new ImageIcon("108slime.png");
-	ImageIcon icon150 = new ImageIcon("150ÑÒ½¬.png");
-	ImageIcon icon200 = new ImageIcon("200grass.png");
-	ImageIcon icon999 = new ImageIcon("000¿Õ°×.png");
+	ImageIcon icon0 = new ImageIcon(test.class.getResource("000¿Õ°×.png"));
+	ImageIcon icon1 = new ImageIcon(test.class.getResource("001²ÝµØ.png"));
+	ImageIcon icon2 = new ImageIcon(test.class.getResource("002µØ×©.png"));
+	ImageIcon icon3 = new ImageIcon(test.class.getResource("003ÕÙÔóµØ°å¸±±¾.png"));
+	ImageIcon icon4 = new ImageIcon(test.class.getResource("004sea.png"));
+	ImageIcon icon5 = new ImageIcon(test.class.getResource("005mud.png"));
+	ImageIcon icon101 = new ImageIcon(test.class.getResource("101ÂÌÊ÷.png"));
+	ImageIcon icon102 = new ImageIcon(test.class.getResource("102ÂÌÖñ.png"));
+	ImageIcon icon103 = new ImageIcon(test.class.getResource("103¸ßÂÌÊ÷.png"));
+	ImageIcon icon105 = new ImageIcon(test.class.getResource("105house.png"));
+	ImageIcon icon106 = new ImageIcon(test.class.getResource("106volcano.png"));
+	ImageIcon icon107 = new ImageIcon(test.class.getResource("107barn.png"));
+	ImageIcon icon108 = new ImageIcon(test.class.getResource("108slime.png"));
+	ImageIcon icon150 = new ImageIcon(test.class.getResource("150ÑÒ½¬.png"));
+	ImageIcon icon200 = new ImageIcon(test.class.getResource("200grass.png"));
+	ImageIcon icon999 = new ImageIcon(test.class.getResource("000¿Õ°×.png"));
 	
 	//½ÇÉ«ÐÐ×ßÍ¼
-	ImageIcon walk = new ImageIcon("½ÇÉ«ÐÐ×ßÍ¼.png");
-	ImageIcon walk1 = new ImageIcon("½ÇÉ«Í£¶ÙÍ¼.png");
+	ImageIcon walk = new ImageIcon(test.class.getResource("½ÇÉ«ÐÐ×ßÍ¼.png"));
+	ImageIcon walk1 = new ImageIcon(test.class.getResource("½ÇÉ«Í£¶ÙÍ¼.png"));
 }
